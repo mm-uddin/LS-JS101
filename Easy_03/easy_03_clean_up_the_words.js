@@ -21,8 +21,9 @@ Algorithm:
 
 function cleanUp(str){
   let regEx = /[^a-zA-Z]/g;
-  // console.log(str.match(regEx))
-  return str.replace(regEx, ' ').replace(/\s+/gi, ' ');
+  // let arr = [...str.matchAll(regEx)];
+
+ return str.replace(regEx, ' ').replace(/\s+/gi, ' ');
 }
 
 console.log(cleanUp("---what's my +*& line?"));    // " what s my line "
