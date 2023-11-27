@@ -6,35 +6,64 @@
 
 const readline = require("readline-sync");
 
-console.log("Welcome to Calculator!");
+function prompt(message) {
+  console.log(`=> ${message}`);
+}
 
-console.log("What's the first number?");
+function invalidNumber(number) {
+  return number.trimStart() === '' || Number.isNaN(Number(number));
+}
+
+prompt("Welcome to Calculator!");
+
+prompt("What's the first number?");
 let number1 = readline.question();
 
-console.log("What's the second number?");
+while (invalidNumber(number1)) {
+  prompt("Hmm... that doesn't look like a valid number.");
+  number1 = readline.question();
+}
+
+prompt("What's the second number?");
 let number2 = readline.question();
+
+while (invalidNumber(number2)) {
+  prompt("Hmm... that doesn't look like a valid number.");
+  number2 = readline.question();
+}
 
 // console.log(`${number1} ${number2}`);
 
-console.log(
+prompt(
   "What operation would you like tp perform?\n1) Add 2) Subtract 3) Multiply 4) Divide"
-)
+);
 let operation = readline.question();
 
-let output;
-if(operation === "1") {
-  // '1' represents addition
-  output = Number(number1) + Number(number2);
-} else if (operation === "2") {
-  // '2' represents subtraction
-  output = Number(number1) - Number(number2); 
-} else if (operation === "3") {
-  // '3' represents multiplication
-  output = Number(number1) * Number(number2); 
+while (!['1', '2', '3', '4'].includes(operation)) {
+  prompt('Must choose 1, 2, 3, or 4');
+  operation = readline.question();
 
-} else if (operation === "4") {
-  // '4' represents division
-  output = Number(number1) / Number(number2);
+}
+let output;
+switch (operation) {
+  case "1":
+  // '1' represents addition
+    output = Number(number1) + Number(number2);
+    break;
+  case "2" :
+  // '2' represents subtraction
+    output = Number(number1) - Number(number2);
+    break;
+  case "3":
+  // '3' represents multiplication
+    output = Number(number1) * Number(number2);
+    break;
+  case "4":
+    // '4' represents division
+    output = Number(number1) / Number(number2);
+    break;
+
 }
 
-console.log(`The result is: ${output}`);
+
+prompt(`The result is: ${output}`);
