@@ -1,8 +1,8 @@
-let myVar = [1];
+let words = ['scooby', 'do', 'on', 'channel', 'two'];
 
-function myFunc(myVar2) {
-  myVar2[0] = 2; // TypeError: Cannot set properties of undefined (setting '0')
-}
+words.forEach(word => {
+  console.log(words.shift()); // logs: scooby, on, two (in that order)
 
-myFunc(myVar);
-console.log(myVar);
+});
+
+console.log(words);
