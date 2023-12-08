@@ -1,0 +1,16 @@
+{
+  
+  "welcome": "Welcome to rock-paper-scissor-lizard-spock game!",
+  "rule" : "Here is how the rule works- '->' means beats; scissor -> paper, paper -> rock, rock -> lizard, lizard -> spock, spock -> scissor, scissor -> lizard, lizard -> paper, paper -> spock, spock -> rock, rock -> scissor",
+  "choose" : "Choose one from ",
+  "abbrv" : "where r = rock, p = paper, s1 = scissors, l = lizard, s2 = spock",
+  "continue" : "Do you want to continue? (y/n)",
+  "enter" : "Please enter 'y' or 'n'",
+  "myWin" : "You win!",
+  "compWin" : "Computer wins!",
+  "tie" : "It's a tie",
+  "notValid": "That's not a valid choice"
+
+
+
+}

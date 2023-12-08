@@ -1,18 +1,26 @@
 const readline = require('readline-sync');
+const fs = require('fs');
+
 
 // r = rock, p = paper, s1 = scissors, l = lizard, s2 = spock
 const VALID_CHOICES = ['r', 'p', 's1', 'l', 's2'];
 const MAX_WIN_NUMBER = 3;
 
-function prompt(message) {
-  console.log(`=> ${message}`);
+function loadMessages(filePath) {
+  const data = fs.readFileSync(filePath);
+  return JSON.parse(data);
+}
+const messages = loadMessages('./messages.json');
+
+function prompt(text) {
+  console.log(`=> ${text}`);
 }
 
 function continueGamePlay() {
-  prompt("Do you want to continue? (y/n)");
+  prompt(messages.continue);
   let answer = readline.question().toLowerCase();
   while (answer[0] !== 'n' && answer[0] !== 'y') {
-    prompt ('Please enter "y" or "n"');
+    prompt (messages.enter);
     answer = readline.question().toLowerCase();
   }
   return answer[0];
@@ -30,11 +38,11 @@ function displayWinner(choice, computerChoice) {
 
   let result = '';
   if (playerWins(choice, computerChoice)) {
-    result = "You win!";
+    result = messages.myWin;
   } else if ((choice === computerChoice) ) {
-    result = "It's a tie";
+    result = messages.tie;
   } else {
-    result = "Computer wins!";
+    result = messages.compWin;
   }
   return result;
 }
@@ -45,16 +53,14 @@ let computerCount = 0;
 let gameRound = 0;
 
 while (true) {
-  prompt("Welcome to rock-paper-scissor-lizard-spock game!");
-  prompt (`Here is how the rule works- '->' means beats; scissor -> paper, paper -> rock, rock -> lizard 
-    lizard -> spock, spock -> scissor, scissor -> lizard, lizard -> paper, paper -> spock, spock -> rock
-    rock -> scissor`);
+  prompt(messages.welcome);
+  prompt (messages.rule);
 
   prompt(`Choose one from ${VALID_CHOICES.join(', ')}, where r = rock, p = paper, s1 = scissors, l = lizard, s2 = spock`);
   let choice = readline.question().toLowerCase();
 
   while (!VALID_CHOICES.includes(choice)) {
-    prompt("That's not a valid choice");
+    prompt(messages.notValid);
     choice = readline.question();
   }
 
@@ -68,7 +74,7 @@ while (true) {
 
   if (playerWins(choice, computerChoice)) {
     myCount += 1;
-  } else if (finalResult === 'Computer wins!') {
+  } else if (finalResult === messages.compWin) {
     computerCount += 1;
   }
   prompt(`You chose ${choice}, computer chose ${computerChoice}`);
